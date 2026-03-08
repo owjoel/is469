@@ -1,0 +1,94 @@
+apiVersion: skaffold/v4beta11
+kind: Config
+
+manifests:
+  rawYaml:
+    - kubernetes/opentelemetry-demo.yaml
+
+build:
+  local:
+    push: true
+
+  artifacts:
+    - image: accounting
+      context: .
+      docker:
+        dockerfile: src/accounting/Dockerfile
+
+    - image: cart
+      context: .
+      docker:
+        dockerfile: src/cart/src/Dockerfile
+
+    - image: checkout
+      context: .
+      docker:
+        dockerfile: src/checkout/Dockerfile
+
+    # - image: currency
+    #   context: .
+    #   docker:
+    #     dockerfile: src/currency/Dockerfile
+
+    # - image: email
+    #   context: .
+    #   docker:
+    #     dockerfile: src/email/Dockerfile
+
+    # - image: fraud-detection
+    #   context: .
+    #   docker:
+    #     dockerfile: src/fraud-detection/Dockerfile
+
+    # - image: frontend
+    #   context: .
+    #   docker:
+    #     dockerfile: src/frontend/Dockerfile
+
+    # - image: frontend-proxy
+    #   context: .
+    #   docker:
+    #     dockerfile: src/frontend-proxy/Dockerfile
+
+    # - image: image-provider
+    #   context: .
+    #   docker:
+    #     dockerfile: src/image-provider/Dockerfile
+
+    # - image: load-generator
+    #   context: .
+    #   docker:
+    #     dockerfile: src/load-generator/Dockerfile
+
+    # - image: payment
+    #   context: .
+    #   docker:
+    #     dockerfile: src/payment/Dockerfile
+
+    # - image: product-catalog
+    #   context: .
+    #   docker:
+    #     dockerfile: src/product-catalog/Dockerfile
+
+    # - image: product-reviews
+    #   context: .
+    #   docker:
+    #     dockerfile: src/product-reviews/Dockerfile
+
+    # - image: quote
+    #   context: .
+    #   docker:
+    #     dockerfile: src/quote/Dockerfile
+
+    # - image: recommendation
+    #   context: .
+    #   docker:
+    #     dockerfile: src/recommendation/Dockerfile
+
+    # - image: shipping
+    #   context: .
+    #   docker:
+    #     dockerfile: src/shipping/Dockerfile
+
+deploy:
+  kubectl: {}
