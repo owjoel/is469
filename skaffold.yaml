@@ -91,4 +91,5 @@ build:
     #     dockerfile: src/shipping/Dockerfile
 
 deploy:
-  kubectl: {}
+  kubectl:
+    defaultNamespace: otel-demo
