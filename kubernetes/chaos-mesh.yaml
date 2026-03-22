@@ -1,0 +1,2415 @@
+---
+# Source: chaos-mesh/templates/chaos-daemon-rbac.yaml
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  namespace: "otel-demo"
+  name: chaos-daemon
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: chaos-daemon
+---
+# Source: chaos-mesh/templates/chaos-dashboard-rbac.yaml
+# Copyright 2022 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# ServiceAccount for component chaos-dashboard
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  namespace: "otel-demo"
+  name: chaos-dashboard
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: chaos-dashboard
+---
+# Source: chaos-mesh/templates/controller-manager-rbac.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  namespace: "otel-demo"
+  name: chaos-controller-manager
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: controller-manager
+---
+# Source: chaos-mesh/templates/dns-rbac.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  namespace: "otel-demo"
+  name: chaos-dns-server
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: dns-server
+---
+# Source: chaos-mesh/templates/secrets-configuration.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+kind: Secret
+apiVersion: v1
+metadata:
+  name: chaos-mesh-webhook-certs
+  namespace: "otel-demo"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: webhook-secret
+type: Opaque
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURIRENDQWdTZ0F3SUJBZ0lSQU5DM0ZXL0tZWFU4RkM5cGtZS0FQejR3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNQmd4RmpBVUJnTlZCQU1URFdOb1lXOXpMVzFsYzJndFkyRXdnZ0VpTUEwR0NTcUdTSWIzCkRRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRQ3VycjB1SmRsV1VuYit2U0dXclF1TVZZZHg5WEoreEM4TmcwVDIKODd5UFZQYmhqcnRDczh0MFQ0N2hmWk03NExQMUxpMEsvTXNJT05TY0ROMkM0MEN0T3ZpQnZyQTBQL1M2RFNzSgpLUGJKZ3IycWlFM25RL1JYZ3d1bkFWOHRVemY2YzAyQUtZd0laSVFNN0dFQzQ3VjZodlh1a1Z2QWJoUU9GVUJXCkRsc1V0bUEzVTNROFRlbk5HbHJCYkdtNUtHVDVpVUpNejY3Q2FmS1JhaksyYlBJbjlnREZSeElKWlgxazJWd0oKSVNZaHd3NFp6OHRuc09zdUxvVzd4MnpCK1ZJUVJzdlI3QTFTN3JNQ1hHMkx4Uys5TjhoTUhlWUJqZFB0YXFDTApzV0IwclN2eWljMjhNcm85eDRZY3FjTEQzc0lIaXhsZVdmN1JrVElIbFJOeFFCd1JBZ01CQUFHallUQmZNQTRHCkExVWREd0VCL3dRRUF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WUQKVlIwVEFRSC9CQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVrZExqL2lrYnR3cUxBZFAzeUM3c2J4amxoQ0V3RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFIKzJvWFgvOHRnZFJ1WmkxelVyd2xyZFkvbTFvRllGUWNPMXRHaXY5UmRwCnh4L2hEd0J2eUxSS01hd2pISWM4dDFkc1FKdmpSZjNFUHpYb29WZ2tqNGFrV1RGOXNvWEQxSHl2MXh4VStsTTEKZExONnRDSURZNGtVMER4VmVRSUN0ejRGa2UvZTN1MWdWV296d3RjeFBsL3Eyc3lQTXZFcWkwVnRNaWJFYWFPSgo4eUFqTHdIVmhWK3pjc3laM1RqamNpZHRMYlprVXJxalA0MTZkNUFqNDZHajhQbmREa29LT2pHYlZjT1RYeE1QCmFQSHpuNDdtTWt4NkJxbW1raDdwTHZndzBvNTErdnFzSDd2WFRVUnpjM1NONlNZUUlON3JIVmJWa0ZoOFJrbFMKUW0yZVNsMWU0TXVlQkVxM2JMVzVSTVh0WERlYS9sdzBaMG01aXVuMnJZcz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBMjdraXJvRjQxZ3VhOHp0RUtlNkJWRUhWN3VkNm5GS2lRQSt2ZnFzTjF6MEp2N000CjIzbU84R05aZ1ZHKzgzRmF5bWM1RTZ0YVU1a1NNUXFQb21PS05WRktDSGhUVDFuTmhKMWcweDZHczFYZVRlUW0KcENrRU1udlROcDFhYTltUUtscmkyc21NWUgvL0xVVVc5YzJSOXBVc0t0SWd3RE03Z2xyRmFuZG1UdDhjSSs2RwplZFdDTTdhNTI2UG8wOWhtWnlSVEN6YWhJNUltd0gwdTZHT3pJNVRubUxlTU5kV0E2ZHVIejc3ejVqNWRPRjcwCllqb0ZiS3dSL2NMYUNTU0h1UW91bnJXY0llVFJpK2xJYUE1QjFwNUgzK0dHVUFkcnBsRWdlYWh6TEY3eExCVjIKVlFJYmdqK0NTTTFoMGJMTFRYcFB6a1BxcHZTVUg0MGZBR1RHMlFJREFRQUJBb0lCQUFxakhCbDRKYVl4SWlOLwozVVV0YVgvdmZ3Q2xuck0yTWVvcGlEeTQ0Yjdua3RML3hYTWtuNldtSGFWcjFITjdLNkxNWEFCR2hhVXg3aVpICkpWeCtkcWl0b29pbDhKeVJFNmpGcUxRWDBId2FubHhGZlJScDh1elJ2MUF2em5xVnFndk80aGdtOVQrUHVzWVIKaC9MRzdMZlVFWE1TUUtrbFljNW1BQlF2S3hvS3pwUmJ5aU5Ka0dGWXg1bERQM1BEYjh3SDhSSlBud3FnLzRFRQpTUTZhaUJMSVBDVVpKL1NzM3B3VUdKQUVvZDNZWjA3WXd0eCsvVTZoamdLakxiM3pSdDFCUllya2U2MkJ5QTRjCnlJanRWN0tnZ24vTC83Yzk4SDUvdWpFbTJ5VW5meFB1SXFpbVFtS1c0NllCY0daUlhnbURJSUd5M0M4U2R0a20KYmhtNG1ZMENnWUVBKzMzc1ErY2tQTVBmT3NRVTZJajdoWVlWaEVKdUM2OVFJK29qOFhac3dJRmdZN1h0MHFFbApNZzVpUjcrVTU4MjJUZ2dWUllFNnBrUG52b0VxQkcvaURUaDQraVhkb1VmenhaZ2NHZkJVSXhQRmZyN0JwN0J2CkR6NE1uRUtMcXVBb0lJRjh4OW5qS00vNitPeitOSkdqTmdNQjlMUnpoenpNYW9qKzMvdk1oQVVDZ1lFQTM2bHQKck0vQm5mVTBaRklXM0dMQlVhUlhlbmRRZVFnMjhqd1hnN0UzVjR4QTZCS0h6SmlpNUJlaEkzMmU2V0hMTXVTRQpYYjlYeDhLbCtmTG96aFdZMUNTZEFHcG1DMFdmTDBMeXlqekJNTHlUcXI4Q1ZrMmxGeW1kelMrMG5KQ0JHL1FRCm9zeDF5T1I1S21zbkoweUx1MktLd0VHVlZiazM0ZmdWZWtwa284VUNnWUFlYTBuRG9OYWlQdkxtVWNkUnBSZi8KTzR1b3RyeEd6NHE2L1Z3aG5iaGp4SUpiTFNzNStlSGMzeDZHSFNjdXJwUXBkaExVbUYvMnNtbjZnZmNLR0ZwWQpUUWRkQW0xL1Q0dXR6OHMrVy9KaFY4ZmduOFFldTFtRGwzYkJBOCtPK0pRQjhvZWNTTCtRTlMvZkloTlJXbmhLClZTek1ZM05CM1ZuQVhSZXZFZTdYM1FLQmdRQ2c5WkdVV0QrQ3FjQjJvZzBKdFpoaVpONy9wM1ltWkI4RzNQQWYKT2g0Vnh6Mit4ZmNzNm52dm9vRzR4T0xrR2hqZUcwNlhHT2pYUGVHc3EzK1hNRHU0RUZGY3h6V0F6eTNzR1VZWQovUGdiVnRyK2VrLzRSQkNYUnIvbHRudElZVVpKRTdBVk9RZGE5L0dxOFVwUUllbzloSUZPTXVTQnVMWGF6V3JICmcxcEI4UUtCZ0d3TmZKRzQ4K29aejlKcXZxM0dYN0ZROFZMTkM2T1NQR1N0S0pIUjFtYUtVOGFmb3VaQ1JzMjcKNy9YZkMvVm1nVkpDbnFOeWJ5czlHS1ZQRHFTK09TTUdweTRXRTBJL0J5cUc2enBWblVSTnVhbDJla3h0ZDg4Tgora3NZd1VBL3Y0azhxOTVrNmNYTDM0SXBZTTB6ZkJkaXdYWUQxVVl5K0pSazB2dkhBeWF0Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+---
+# Source: chaos-mesh/templates/secrets-configuration.yaml
+kind: Secret
+apiVersion: v1
+metadata:
+  name: chaos-mesh-daemon-certs
+  namespace: "otel-demo"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: chaos-daemon-cert
+type: Opaque
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURIRENDQWdTZ0F3SUJBZ0lSQU5DM0ZXL0tZWFU4RkM5cGtZS0FQejR3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNQmd4RmpBVUJnTlZCQU1URFdOb1lXOXpMVzFsYzJndFkyRXdnZ0VpTUEwR0NTcUdTSWIzCkRRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRQ3VycjB1SmRsV1VuYit2U0dXclF1TVZZZHg5WEoreEM4TmcwVDIKODd5UFZQYmhqcnRDczh0MFQ0N2hmWk03NExQMUxpMEsvTXNJT05TY0ROMkM0MEN0T3ZpQnZyQTBQL1M2RFNzSgpLUGJKZ3IycWlFM25RL1JYZ3d1bkFWOHRVemY2YzAyQUtZd0laSVFNN0dFQzQ3VjZodlh1a1Z2QWJoUU9GVUJXCkRsc1V0bUEzVTNROFRlbk5HbHJCYkdtNUtHVDVpVUpNejY3Q2FmS1JhaksyYlBJbjlnREZSeElKWlgxazJWd0oKSVNZaHd3NFp6OHRuc09zdUxvVzd4MnpCK1ZJUVJzdlI3QTFTN3JNQ1hHMkx4Uys5TjhoTUhlWUJqZFB0YXFDTApzV0IwclN2eWljMjhNcm85eDRZY3FjTEQzc0lIaXhsZVdmN1JrVElIbFJOeFFCd1JBZ01CQUFHallUQmZNQTRHCkExVWREd0VCL3dRRUF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WUQKVlIwVEFRSC9CQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVrZExqL2lrYnR3cUxBZFAzeUM3c2J4amxoQ0V3RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFIKzJvWFgvOHRnZFJ1WmkxelVyd2xyZFkvbTFvRllGUWNPMXRHaXY5UmRwCnh4L2hEd0J2eUxSS01hd2pISWM4dDFkc1FKdmpSZjNFUHpYb29WZ2tqNGFrV1RGOXNvWEQxSHl2MXh4VStsTTEKZExONnRDSURZNGtVMER4VmVRSUN0ejRGa2UvZTN1MWdWV296d3RjeFBsL3Eyc3lQTXZFcWkwVnRNaWJFYWFPSgo4eUFqTHdIVmhWK3pjc3laM1RqamNpZHRMYlprVXJxalA0MTZkNUFqNDZHajhQbmREa29LT2pHYlZjT1RYeE1QCmFQSHpuNDdtTWt4NkJxbW1raDdwTHZndzBvNTErdnFzSDd2WFRVUnpjM1NONlNZUUlON3JIVmJWa0ZoOFJrbFMKUW0yZVNsMWU0TXVlQkVxM2JMVzVSTVh0WERlYS9sdzBaMG01aXVuMnJZcz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURYakNDQWthZ0F3SUJBZ0lSQU9vTVdybmh4cDNFUlBlUUE1STJvM2N3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UUmFGdzB6TVRBegpNakV4TURBM01UUmFNQ1l4SkRBaUJnTlZCQU1URzJOb1lXOXpMV1JoWlcxdmJpNWphR0Z2Y3kxdFpYTm9MbTl5Clp6Q0NBU0l3RFFZSktvWklodmNOQVFFQkJRQURnZ0VQQURDQ0FRb0NnZ0VCQU5QdjFOcWw5MjZwOVkwSXd4SzYKNU1qR2VSVDdWZ1kyRU5Sb0J4dFdJdTZUUnhBOXdRWlRjZW15TG4xa1NqMk5jclJaTFZEQXpYc3pQNGtpMm5veAplcW1HMnVqUmJNZENjQ1ROWDVnYWIrMm9PQ01rZ1pnSGIzaEwybUdGZlgzS3JvY2JoYjZvaThMekQrejRrRmNiCkIrRld4eHZqZE1MNDlCMGxFWEppNnNrUkRKT01Id0pyL0VZK1N3cFpPSVplb0xKTithSzNFcThqMUQ1akRHK0oKKzVoVFhDclZwVjVRajdBQjcrRENVNXBuNnAzalZuaWhlc1p5N1pkYzI4b09RUTZteVM0OExjNGJsQS9nY0NGdQo2d1UxdFgydXp2NlRaelV5R01zeDZmdmp1M3pUdm45VSsrSHRVRDBxcGEvSmZlTGNTVzhVakFSVDltbVpwblc2CmtrTUNBd0VBQWFPQmxEQ0JrVEFPQmdOVkhROEJBZjhFQkFNQ0JhQXdIUVlEVlIwbEJCWXdGQVlJS3dZQkJRVUgKQXdFR0NDc0dBUVVGQndNQ01Bd0dBMVVkRXdFQi93UUNNQUF3SHdZRFZSMGpCQmd3Rm9BVWtkTGovaWtidHdxTApBZFAzeUM3c2J4amxoQ0V3TVFZRFZSMFJCQ293S0lJSmJHOWpZV3hvYjNOMGdodGphR0Z2Y3kxa1lXVnRiMjR1ClkyaGhiM010YldWemFDNXZjbWN3RFFZSktvWklodmNOQVFFTEJRQURnZ0VCQUlnYmdYcUI1cmpKUUFlSE1KbnkKRDRCVXhiMnM2K0ZvWFI2ZEZJWlJyY0p6TlNHQmR4NUdMcVNWZnlCQnJHRW5iQTMzMjYvcm94QTdiZ3NHUm1rNAp5VkZZb3NZMk5PSGxwbzA5L3FwSC9uMUU5YjVRLy92NjV1RFovNlRUbmR5ZUVYaUdMa0hKY3duQjVaMzhLM0NnCktVYlJuVU1MeXRhRUVLai9vd3NVbkpic0tmVEdlTDdhU2Yrb213bDFUbVJhRzdYZXptbk1HbEwwSXgyZ2tWYzEKd01nUTlsVzhmcE0rV0FwSzllT2hsM3cxN2Y4eUMybnNHdmpYUGxVVmxiNUpVdVQzbVJPK0dvVStLM3JFSys2eQpqOFdndzJYeU93ekJIdWdkQnQxbmpoMVRncGtlODNMaFVQazRROUxibWdoVHlRYVFBTHE0SjczSVpkM1oxUjU5CkZncz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBMCsvVTJxWDNicW4xalFqREVycmt5TVo1RlB0V0JqWVExR2dIRzFZaTdwTkhFRDNCCkJsTng2Ykl1ZldSS1BZMXl0Rmt0VU1ETmV6TS9pU0xhZWpGNnFZYmE2TkZzeDBKd0pNMWZtQnB2N2FnNEl5U0IKbUFkdmVFdmFZWVY5ZmNxdWh4dUZ2cWlMd3ZNUDdQaVFWeHNINFZiSEcrTjB3dmowSFNVUmNtTHF5UkVNazR3ZgpBbXY4Umo1TENsazRobDZnc2szNW9yY1NyeVBVUG1NTWI0bjdtRk5jS3RXbFhsQ1BzQUh2NE1KVG1tZnFuZU5XCmVLRjZ4bkx0bDF6YnlnNUJEcWJKTGp3dHpodVVEK0J3SVc3ckJUVzFmYTdPL3BObk5USVl5ekhwKytPN2ZOTysKZjFUNzRlMVFQU3FscjhsOTR0eEpieFNNQkZQMmFabW1kYnFTUXdJREFRQUJBb0lCQUI4aVJzOGQvWFRNMCswMQpnYzZ4Rk9YbnZpYldhME03VXdxWkE1NUE3NTNEbGZkdFV2dFdhOUFNWkdiNFFpMjdwME9XTENHR1NVbFZkSHAxClc4b0NsY1hzc1NEdGp3RFFvai9OeWNMQzgzbGlzbWg3TnV4NS95YVpZZ25jZmR4cVYyd3luMW1zVWVmQUpERkkKTEpBWFFQZVo4Mk1GN1lPczVkT1lPL0ZsVlo5V3RPTm9obHZUZjdaRUdvM1puY1RpckxBaS9STGhDZ1RRTDlOYQpZcXVqa2NMS0VNd084a3pKNDZNdXVROWo2WkZuYWhDbGJZWlRWVFZ4THlHZ040eUsyQzIxOWdQdksrNHplNXZuCkZRUFp3bGM1YjhlZHhqcGRRaEpkWVdhNTJEdnJwZWdHZ1J6VVRlTldEaUVyVEt6d09zTlNuaWo0Zmk3QVNjT2cKek14cHU1VUNnWUVBNU9xRzRWWlVmSjcwMGFiM3MrSmU1bHU3YjF3K1FnWFVWNDQvOVNZU1hINWZ5NjVTdk16bAoyMnFrYy9SMEpmUUJxZjg2NG9NeTd0THJYWjZuaGNkSHZaTVhaNU9wU1Y3Y3dUTUMxWm9BQ0t4ZHYzK01nYWsxCkYrbXNWNUxNOXNsc01SOVhObmZ4eFpNTzBrNDhNRlFNams0RUlyN1pIeThlZ2JSVFRleFVOV2NDZ1lFQTdRTUkKRjZBTTBsRDNRdG95THhLR0dkc3pmSi9rakpmMzBJTjFuU3RqRlQ4bitOTDlqNWNKSWVBRTZ3QjVtZ21waHZhYgpOTk4rS3UyMWhhalNQRFlPM0VlMzIvbmVnWWphdHl2N0J6Z3ZxUUZNNFJQdno1VlZDMjdMeVh5eTQwYVNqNkFmCjVsSzc0cnI4MGIyWVBpMC9RQ0xOQmdHZkgwTUtxSGYreXZNd2RzVUNnWUVBbVpkU0VIY2dFTTJHYmZTZFZqQ1kKZys4Z2Y4TmdjbVArNlJBa2taT04xa2xrZFFEdHVvZXY0ZHhYb3dWdHVObFRGSUNQUGRQUnBMUVgvNlNudWZiUApoNzdkZ1QxdDVEQ2w1V3NZaDhEZ0xQR1pwUmNyYXdQZy83NWxTQXpUUVBJOGlXa0IxeVg3TGhsUlpJSGhtSHVNClFSN1BYNUMxbFZyRUdUcW9laXdMQkJrQ2dZRUF1dXlFS2xYUkp1SXlVR2hUNGVvakZ5dFpEUFh4dzZ4ckJ1bFgKRGpEVXdVSUJIVzRTQ25nYy9MbDRSM3NsYklZb1RNZ2JtbXNlZTI3a2xkaVNqbWc0Q2lVSjdaVEFscnEvZkcxVQpXdHBHUkcxQkc5YWtjTHdleVppRllwQlZhWWdVT1BBWm1JWXhwbHpBM2c1QWp2RVNqRnVtQlJHc1ZIU0VhRi9TCjlHOGVEdDBDZ1lBdDNYNVdPYk94VkNQWkFLREp1L3FFdHhiREhaTUtidjdqTW80ellubnZYQVpubUhoamF0eEoKenBGR1EyU1g2c3RycmNGbHZEdHA1RE0vL3krSlpxdWhrSmxhNkZHNTR4aE5OODRVMW9xMUQ0U3dDc1M4TTgwMApvV2lSeldLa3BNWWJ3ays1cjdRUFJtRGlsRHRFM3ExdGZUWlhGNzY4ZkFVcXo3VjE4bUQ0V1E9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+---
+# Source: chaos-mesh/templates/secrets-configuration.yaml
+kind: Secret
+apiVersion: v1
+metadata:
+  name: chaos-mesh-daemon-client-certs
+  namespace: "otel-demo"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: chaos-daemon-client-cert
+type: Opaque
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURIRENDQWdTZ0F3SUJBZ0lSQU5DM0ZXL0tZWFU4RkM5cGtZS0FQejR3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNQmd4RmpBVUJnTlZCQU1URFdOb1lXOXpMVzFsYzJndFkyRXdnZ0VpTUEwR0NTcUdTSWIzCkRRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRQ3VycjB1SmRsV1VuYit2U0dXclF1TVZZZHg5WEoreEM4TmcwVDIKODd5UFZQYmhqcnRDczh0MFQ0N2hmWk03NExQMUxpMEsvTXNJT05TY0ROMkM0MEN0T3ZpQnZyQTBQL1M2RFNzSgpLUGJKZ3IycWlFM25RL1JYZ3d1bkFWOHRVemY2YzAyQUtZd0laSVFNN0dFQzQ3VjZodlh1a1Z2QWJoUU9GVUJXCkRsc1V0bUEzVTNROFRlbk5HbHJCYkdtNUtHVDVpVUpNejY3Q2FmS1JhaksyYlBJbjlnREZSeElKWlgxazJWd0oKSVNZaHd3NFp6OHRuc09zdUxvVzd4MnpCK1ZJUVJzdlI3QTFTN3JNQ1hHMkx4Uys5TjhoTUhlWUJqZFB0YXFDTApzV0IwclN2eWljMjhNcm85eDRZY3FjTEQzc0lIaXhsZVdmN1JrVElIbFJOeFFCd1JBZ01CQUFHallUQmZNQTRHCkExVWREd0VCL3dRRUF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WUQKVlIwVEFRSC9CQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVrZExqL2lrYnR3cUxBZFAzeUM3c2J4amxoQ0V3RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFIKzJvWFgvOHRnZFJ1WmkxelVyd2xyZFkvbTFvRllGUWNPMXRHaXY5UmRwCnh4L2hEd0J2eUxSS01hd2pISWM4dDFkc1FKdmpSZjNFUHpYb29WZ2tqNGFrV1RGOXNvWEQxSHl2MXh4VStsTTEKZExONnRDSURZNGtVMER4VmVRSUN0ejRGa2UvZTN1MWdWV296d3RjeFBsL3Eyc3lQTXZFcWkwVnRNaWJFYWFPSgo4eUFqTHdIVmhWK3pjc3laM1RqamNpZHRMYlprVXJxalA0MTZkNUFqNDZHajhQbmREa29LT2pHYlZjT1RYeE1QCmFQSHpuNDdtTWt4NkJxbW1raDdwTHZndzBvNTErdnFzSDd2WFRVUnpjM1NONlNZUUlON3JIVmJWa0ZoOFJrbFMKUW0yZVNsMWU0TXVlQkVxM2JMVzVSTVh0WERlYS9sdzBaMG01aXVuMnJZcz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURhakNDQWxLZ0F3SUJBZ0lSQVBua2VwcHpkeit6V2l4M0J5aDBEK1l3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UUmFGdzB6TVRBegpNakV4TURBM01UUmFNQ3d4S2pBb0JnTlZCQU1USVdOdmJuUnliMnhzWlhJdGJXRnVZV2RsY2k1amFHRnZjeTF0ClpYTm9MbTl5WnpDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTUo4VVR2ZjFRNnkKbENiZG55cmJoV3c1VUt3Wm42bTJxRmtUeGU1V3dQSzVaT2V4SUVyVXVvVjRoVEtpM1VOMHk2dS9GOVlRemhqMAplbGdBRXo1SXBtNC9aSVZkZVNZSFBta2tSNE1EdmRMNHpIVTRjK1FNdmVZZkZXeXJLemtFazlWdU1CNHZsTXlPCnlmYWZhMWdoS1NxL01SdEMybndac1R0Q0ozZFRUbGhEMTd1Q2hmb2FNZXNpd056YmtnTmFYWjQ0c1JITU82NEYKdC9HZ1pWZjRnWFRVdWxvUElPR3p4bXo1YXYyWG4zL0dMNDVwOThYdTNDZ0RBeWphWFJacCt5ZCtQb1lTeUFiNwoveERySTFYU1llSXp1c09uaEIzeEJOT3hCRmtqV0ltWFBCaGpmOGU4bXZyemJrQWFsTUk0R0VDb0plUHpYMVhyCkNWRTdXUzduLzFzQ0F3RUFBYU9CbWpDQmx6QU9CZ05WSFE4QkFmOEVCQU1DQmFBd0hRWURWUjBsQkJZd0ZBWUkKS3dZQkJRVUhBd0VHQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQ01BQXdId1lEVlIwakJCZ3dGb0FVa2RMagovaWtidHdxTEFkUDN5QzdzYnhqbGhDRXdOd1lEVlIwUkJEQXdMb0lKYkc5allXeG9iM04wZ2lGamIyNTBjbTlzCmJHVnlMVzFoYm1GblpYSXVZMmhoYjNNdGJXVnphQzV2Y21jd0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFFY2oKYlk5WVl2YmFzYnNwOGwrTFVheVkwZzVwR1BPVEVvSEdMd0VKKzEwSDA4YnlFVG1KTCtZSnQ3eERkTlRLMnVldApHV2ZCa0QwOHB4T1VKTnhWNmFBckJTYjltRGZxRTlBRmxWSVhsbk12VENsU1VmeXJNREl3VVBYNExpV2wwUllLCm9RRHJKYkFGUG5mejlxek9BRDRudmtaT3pLbWJ1OHdOaThweG5Idks4MUJZR0pZdUpNLzV2TnpEcyttQysyNzUKY0MwMG41bHRBSGVadGN6eUJEdGdxNWxMSUFxQWptd1lNNG1CcTN2WjIwMlNwa2FnZVFPYVlIR0VQcmY4b1RoeQoyckxwOEN4ZTQ5S0t5Q2JtcGlodUVsUVJyV01wU1UyZjl2WjZqTFdoaFY4NXl2QUV5ZGlvUnVNQkk4dmFJYnQ1Cjk2RFJjRWtuTXRNMTlWT2QrT1k9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBd254Uk85L1ZEcktVSnQyZkt0dUZiRGxRckJtZnFiYW9XUlBGN2xiQThybGs1N0VnClN0UzZoWGlGTXFMZFEzVExxNzhYMWhET0dQUjZXQUFUUGtpbWJqOWtoVjE1SmdjK2FTUkhnd085MHZqTWRUaHoKNUF5OTVoOFZiS3NyT1FTVDFXNHdIaStVekk3SjlwOXJXQ0VwS3I4eEcwTGFmQm14TzBJbmQxTk9XRVBYdTRLRgoraG94NnlMQTNOdVNBMXBkbmppeEVjdzdyZ1czOGFCbFYvaUJkTlM2V2c4ZzRiUEdiUGxxL1plZmY4WXZqbW4zCnhlN2NLQU1ES05wZEZtbjdKMzQraGhMSUJ2di9FT3NqVmRKaDRqTzZ3NmVFSGZFRTA3RUVXU05ZaVpjOEdHTi8KeDd5YSt2TnVRQnFVd2pnWVFLZ2w0L05mVmVzSlVUdFpMdWYvV3dJREFRQUJBb0lCQUFzdmMvNHdYUDNHTlI1TAo2eU1zUmJ2RTVPZ1VNc293WUZ2aVhUNnBIM084cnJQSlpoNTBjejNKRzN6U2M0QWJyK3lsK1V5VHJ0bjYrTVpaClNzSUpFdEwxTXpNMnl3aUhySVlHdVZTVFFWQUNIbDBCSUN4aXRBUjJLVEo3TGJab2xqQUlwRS9SdWxjYkRhTlgKZnc3NjZVTE82MlIvTDJwMkt3UjlFZTJiV2lUenVEbVVQdDlkRitvQUJTa3J5aGVkd01HVTRwRmdPYXBvQnhhNAo2YU1vMEE3OUxYVmZwMlVVZW5vQjY1Lzc4TmJ1TnFDS2lJK2JTVU9qSkxIUDd3QS92UUx1WFRoVFpTcGtCT0tuCi82TDFydkRTMU9ud3JEa0w4OWxSTHNrVVRyVzdUcHV2Zk54SE0yZXBqNmlkSU9RYU5iMndERXZPMW4vV0I0VjQKWnhEdm1TRUNnWUVBMDlnM0lPdy91K3ZCeFVwbGtsMC96MkNEZzd4OUFENHNJNm02N0hzdzdsQ2s4d0F4WVpLaQpobmVUTnhxV29pckFEZFVBSFVWMDdUNUowcDIrVDFrUHNXdnpoTWVSUEtLMGRRT20xREJwclVOMi9hbDVGNXB5Clg4WEc5cjVTQXNLOTNPRDlhV0pEV0NEcllMdDNlNVVqS2V5cTFUWHFFNGl2eWVrTklaaE5xRmtDZ1lFQTZ3WFkKekdZZmcvOEF3Z0V2akgrc0VTY0ZIditLdldzQi9BbUZBTGo0SmkrS1RENllqYnVIWjVBbFdmdHVDZUR5YVRTSwpJcDlMY2RvdTIyUEJaUVJEb0V3ZG96UGE5ZGxLakxrRHRrTnl2TFZ3Q1FtY0szZGtxb0tqT0djdDc3dVN5M0JjCjF6Ri9laFE5Z3FjZEZsSkg2SENPbE14MzdjR1JXN0g1Q25zUWJ0TUNnWUJoR0pxNzlreUgvMWpDNm9SL2YwbjkKN01pYW1zdllUcWJBZWN6NUVzV3NsVDNsT3ROblcyUXVxYVBKLzkvRzJEMUttYlFCdHBJUEl4dUc4MUlFNEZjMwpCTG1LeEVXbk94UG5CaE55OGZXZHVteFJlMW5MSGJrS2VJWG5GZmhVMTVsYUlhMUVuZ3NyMjNyR3pXWElPT1R6CkZFeUFpTU9PekhsMTIrRnU0blhGa1FLQmdGN3ZZTERJTzhqTTlCaHA5RFFUeW9Tdk4yRmJKa2IzZDdqQWU2cGMKRFZrWGNRejFhQmd3ZlRTM1JHOUJvaVI1YWxKVzk4bWVnUkkvYVJnVUJxWHdnQVM3V21sM1krWlZYTWpWWDR0NwpXVmlqRGR1SXR6M1RuNlZFMmZ2SnFnT2h5RjFIU1NsZ0JEZGkvNm5NS1hLL3orNHpzVlNuOTNYaDcvNlRPSjhrCk1QSWpBb0dBQmJ3Qy9wWkZNRzUxaWhVWDV2M0ZmTDFubGQ1eFdvNzFHSmw0aExDcTU2bUoxakdKby8zMjFOalEKQkhhZXpmelBvaXg5bVFLUTQ3MTQ5VW0zcWlGdkk4djRaZUh4TzdsdDNyTDgycVp1UnBGcXh4M2M3QWR2aGhNeQpJZzM3NUtmWER3cVZwZ2tqT1pxc1gxNFFSYnpWQXBTaTNncncwcDFjL1R6THpQVTlnbUk9Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+---
+# Source: chaos-mesh/templates/secrets-configuration.yaml
+kind: Secret
+apiVersion: v1
+metadata:
+  name: chaos-mesh-chaosd-client-certs
+  namespace: "otel-demo"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: chaosd-client-cert
+type: Opaque
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFekNDQWZ1Z0F3SUJBZ0lRY2dDOFVqbjBobEVObEZKRkc1UUNBakFOQmdrcWhraUc5dzBCQVFzRkFEQVUKTVJJd0VBWURWUVFERXdsamFHRnZjMlF0WTJFd0hoY05Nall3TXpJeU1UQXdOekUwV2hjTk16RXdNekl4TVRBdwpOekUwV2pBVU1SSXdFQVlEVlFRREV3bGphR0Z2YzJRdFkyRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCCkR3QXdnZ0VLQW9JQkFRQzZ4QkwxWVdJYUpyekV4MFZiUnJVb0Rld01wYUhycEJLek1ydFVqaTlzdHkzRThNKzAKNXRHSy95YnBXSjhYUG9DNGZic3hhenY4UDJjaGpTdzNvaHpYVWVwSjNrWGgxUDcxaG5PNzRyTWc4NHZaYUNYdwo3bUxHL05CSFNkemJhdTJybmNWZGZobml5RTRaR0hEUS8vVktadWZCQUZ4akVIc3U1KyswRjNFdEZ2YnFDQ1hHCk40a2p1ckNXRVM4OVNPeUpQQ3dJdThmU1BtNUdybUZSVUhYN3JpSmgxZEExdTJnSE11dzVMdWNyMzErSk45c0YKZHA1NHh3UlkxZk10M2JDVU5yNE9TS0VVZStoSno4ZitKeWVGTndoa2lCQW5ZTHZiOTUvb3Bmd3ptbUxyVW9kRgp3akh5aEdqWXV5Y0orRkdCNWVUbkllTkxhYnpBSWU1YUN3cXRBZ01CQUFHallUQmZNQTRHQTFVZER3RUIvd1FFCkF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFIL0JBVXcKQXdFQi96QWRCZ05WSFE0RUZnUVU0dEdDWURUVWNDbUp4TUgxZTdibC9FbkpHdnN3RFFZSktvWklodmNOQVFFTApCUUFEZ2dFQkFDWHpnby83T3FYQnJOc04rbmJHQVlWdEFlVUg4TWVZc1V0WjRXK01QK25oZjdaa09lMm52a1VRCmQ0WG9Va2k2U3FYS3ZlSnhvZm43TjFNZE93YVdFTEdQdEFpbkFxZUZGaS9YNGxnS0J3TnljTDdzNkxRaDJDaVQKQmUyQTFvZitCbVpsa3luMEM2VldBb0dZSkRiYVYvYUVpU0tPcUFGaXREc01vSU5lYTJ1Wm5JdmUvckwrYXo4RQpsNUI1bWN4R1J0dHJtRTIyc294VmZ0Q3Jrd2Q0M2J3SWMyWGNuVDRJUUlsS0RZTCtpSXFUdGhuYzhMOTVWYUZFCnFmTDNRU3oyZFFXR1pnYWhkU1dNWlh0NGlLMUlHc2tFaXR4RllZdHg0RmpSd2JuSEFZZnNoNUp2VjRoaS9SZVEKVFQwek1IU3kwUjYwZ2g1WWNLK0F1bCtNaHNnSVFxbz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  ca.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBdXNRUzlXRmlHaWE4eE1kRlcwYTFLQTNzREtXaDY2UVNzeks3Vkk0dmJMY3R4UERQCnRPYlJpdjhtNlZpZkZ6NkF1SDI3TVdzNy9EOW5JWTBzTjZJYzExSHFTZDVGNGRUKzlZWnp1K0t6SVBPTDJXZ2wKOE81aXh2elFSMG5jMjJydHE1M0ZYWDRaNHNoT0dSaHcwUC8xU21ibndRQmNZeEI3THVmdnRCZHhMUmIyNmdnbAp4amVKSTdxd2xoRXZQVWpzaVR3c0NMdkgwajV1UnE1aFVWQjErNjRpWWRYUU5idG9CekxzT1M3bks5OWZpVGZiCkJYYWVlTWNFV05YekxkMndsRGErRGtpaEZIdm9TYy9IL2ljbmhUY0laSWdRSjJDNzIvZWY2S1g4TTVwaTYxS0gKUmNJeDhvUm8yTHNuQ2ZoUmdlWGs1eUhqUzJtOHdDSHVXZ3NLclFJREFRQUJBb0lCQUNLRGYzbG5JS2p5aGFuYgpwVjZEeDVCNldpZlFLQWNTei8zYm56QzJBZCtXVGxmNXBIaXF1d2h6dEc0azJXbURQR2hibTg4N0lOK3htODVnCmQwNWtuKzNPam54T0hoM29yYUVUMHFsaThIVmpiSEdseEhVc3FJWmJTK1lRcVViSEVOckpFaUwvM2FyQ0YyU2QKMXFOWTJheUJMY3pGMDB6ZlM5UlVPa0RPb0RTVG0rU2RES1ZKZlkwb1gwZG5wbkZJN3JnYk9RNHJPT0F2SE5QTQplWUV1cXRGRUhEWm5TR2dGWkFaalBkbThtSDB6ajAzQXpaTnF1cjJVYk9ibGxEbFJiQmlKQU8yNVpVWjlvY1VWCkdQU1lNMzMxZzRXMXVMZjhia2EranRqVWJhd0hmVDBJRytIVzVaZ0YvM094eXU5TnRKeUFrQmg1bkVKai91bkUKdTNBYk1nVUNnWUVBNTQ0Qi9Sb3NMMndMNXR3MlNHMGpTZVVJa2V1ZTFaTWI1WnpjUjVZVnBDSVo4QWd1QjQxdwp1a094a21oNFE3b1g4WUdvcFVOM0FZWXVSeFJYd29nMjNvV0FYMXRtc05ZRE1hQUxLR1BzVERuRld3Y0dGTGJXClhPOEwvY2h6WWtYdGZhQ2tLT0c4R0pGNFNvRDRUYXVLYjUxemdiejZaTWZIQmdldVZaNndMeGNDZ1lFQXpudWEKNjluNVVzVkdwMmNrODFsakNtS01lNnJBYk5aYTR4SlhQYngra1FBaXd0WmhENHdUdURCM0RUdkVXaVNQdzJZRgpvMSt6ZzMyK1NvRHFieWRjVitIQUNvNE52R3FoWUkzRFpZc2M4ZDNTd01QYUUxVGVNcU5YM2hYbDBYS2c5K0hKCnVRMUhaK0w0REhkNzJ1T0ZQZEQ1cUIyS2pUUjRGL0F6RHZyc2p0c0NnWUJqRDJDUWJCTDlFcWNnMDVLeGQyZEMKWktZKzd1TWJrWHk4eFZlRGxKU2JqQzgyZmZsYko4cFRGVVN4VXRvb2QwTnBBVVFwdDJ3QkRldGNZenFNTVlQdgp2SU5IeUMxdGQ1RVVPTml0SmRwZ1hkS3RkNXJGWDliakdTMHpHLzhveXF1b05BSW1yek90K3dYUU1jNklROXZNCmxqcGxCWGpGaHFZQlVXWG1vU1hVYndLQmdDRUZrWXdnaXdnYXRxYjFEdXJBSTkrNFRRRkdHSW9QYWUrZ3NrVVUKVFNXQllRM0ozVEh3VkFNRDlUWXZsY0pZMElrT1d0NTY0cW1ueFhRQzAvczh6ejdhd3F5dGRUTHAxcThyWE5Gegpnd2lIVWpvejJEOTVOaVBoRFo5ZDN5ZzA3ZHRXeDcwSmk1N29wSVRSNHdQcG1SaCt3RDZMb3VuY04weVV4SVdqCnlZczdBb0dBTDFxTzFqWXR1OUFJUFBEdENXaVBLWUpSSUt5RWNnSThrWlUxZUdPWmJydFJCTGZuK0JPQ3ptalMKTVlxb0srcWJpVklOTG9xUk5BQ3gvTEdBMGE5dm4vcTNxRXRBb0hTRGxzREpzd3ZRRFE5c1pjTDcra1RUUHlZegpXVWo0WGpKRGE1dUJYMFFEcVNEQmpoK0wvZ3d5SlFONE1EeWk4eGlEL0JUeGVET082ZU09Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURaakNDQWs2Z0F3SUJBZ0lSQU96NkVrc2MvTWNGalk4ZnptZ0dYY0F3RFFZSktvWklodmNOQVFFTEJRQXcKRkRFU01CQUdBMVVFQXhNSlkyaGhiM05rTFdOaE1CNFhEVEkyTURNeU1qRXdNRGN4TkZvWERUTXhNRE15TVRFdwpNRGN4TkZvd0xERXFNQ2dHQTFVRUF4TWhZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbU5vWVc5ekxXMWxjMmd1CmIzSm5NSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQXNMYzlLS0pRWENJMzRrTGIKR3hvMVJKd3liVEprbngwN3lnV005VlJsTUdZUVpsMVhaMHdtV1Yxc3pHbFVUVkpBa3ZXdUZpSktLS3hnWGprdwoxcURhTDZBTktCREdpWExYZk5DdlpxMjlnVENHSzFORUllN1FMcnJVVURJSXhsbldBNWZsMHl1RTFuZm5HSFNvCk8zVU5GcjBLRjg0cTcwckt6Um5mU2ROTU5lWkpKWnVLd1luV3Nnd2hOTEhQR1dXa0VZcG56eDFKajhXTnNVSnYKSHhtQm1zRmg5bHk3THM1SGlQWHdvWXJyRm5hcEYxUVVCZVlURHY0Z05aTzNsTXNIMFRhelFkWmNEcVE4anN5YgpsaE05djAzTGh5WmQ1N0QrNmtNUHFSSDZQaFpsc3NqTndEMytGYkxKbFNyZlA4dGR6YXRaU1dad3VvL1FTZFd0Cm9KeFFBd0lEQVFBQm80R2FNSUdYTUE0R0ExVWREd0VCL3dRRUF3SUZvREFkQmdOVkhTVUVGakFVQmdnckJnRUYKQlFjREFRWUlLd1lCQlFVSEF3SXdEQVlEVlIwVEFRSC9CQUl3QURBZkJnTlZIU01FR0RBV2dCVGkwWUpnTk5SdwpLWW5Fd2ZWN3R1WDhTY2thK3pBM0JnTlZIUkVFTURBdWdnbHNiMk5oYkdodmMzU0NJV052Ym5SeWIyeHNaWEl0CmJXRnVZV2RsY2k1amFHRnZjeTF0WlhOb0xtOXlaekFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBcVlwMFFFL2wKL05ETGIrOUZYQ0Z4WmdmSUplK2VzNXg4Zndybmd0SnNRVlYyK3lOTnovQUpZbmtRUk5VZS9LN0N3T2Z3WlAvQQpHYXY3YnN6aFo0akJnWEJzTWdDVk1Pd3M5VEpBN005UDkwZ3JtVlZOakNVNDRHZm5sMW9XaVJyc2tMS0JCWU0xCkkxOElnWHFDNjZ4U3N5K1Q5K1hiTzFHaWgra0E3Z0tyT1VDYjliY292cTJneGcxdjdneG05K1dINGgzRzF5QlIKWDhGcUhqMTYvL255dk9KU0VIYzJhM3hXRDdpdTVIVjZPY01JZ01VdEV2TnEvcEpGVE16U09yUk0yb1BhUHljawpOc2YrTVR1U1MzQmd0Y3FCVDc4ZDNvNVNKTjNISTNUWnhMRkRWSFZrSlpYRXVQTWI5SDZQWGlxZm5rOFh6N0tUCmRaZXBpdUZlRTFXVVN3PT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBc0xjOUtLSlFYQ0kzNGtMYkd4bzFSSnd5YlRKa254MDd5Z1dNOVZSbE1HWVFabDFYClowd21XVjFzekdsVVRWSkFrdld1RmlKS0tLeGdYamt3MXFEYUw2QU5LQkRHaVhMWGZOQ3ZacTI5Z1RDR0sxTkUKSWU3UUxyclVVRElJeGxuV0E1ZmwweXVFMW5mbkdIU29PM1VORnIwS0Y4NHE3MHJLelJuZlNkTk1OZVpKSlp1Swp3WW5Xc2d3aE5MSFBHV1drRVlwbnp4MUpqOFdOc1VKdkh4bUJtc0ZoOWx5N0xzNUhpUFh3b1lyckZuYXBGMVFVCkJlWVREdjRnTlpPM2xNc0gwVGF6UWRaY0RxUThqc3libGhNOXYwM0xoeVpkNTdEKzZrTVBxUkg2UGhabHNzak4Kd0QzK0ZiTEpsU3JmUDh0ZHphdFpTV1p3dW8vUVNkV3RvSnhRQXdJREFRQUJBb0lCQUV4aWFDVXdROXdQVG1pVwp6VzZoblhUU3IxbFQ5dnB3QUhBS2hpdGxGM2djSmVxWlhqWmdUQk5FdHNxRW5OUHZRY3BFTjhPSmZ0U2w3ZUhNCmhyZS9QNUJtZGtsak51NGluZEp0d2VONEpmbTVwOFVDY09qWitWSzVueHdyQkcvNFZQR29yc2JnZ01MVGdTaXAKQkM3dklZRTZwU28xQzRuem9rV1ZjVmJQNXBsRkFVV2EzcXFsMmFGb3ZCbFdXMXJrN2ZWOU9sMXdHUEFXQ1dXWgpYdnNKM0tRSGhFdXhBMWlCWTRIeldnd3BacG5TQkNUYURJRjIzeWMwZTBWK1M2aVB1dU04cVFEZDQ0dEM3SUsxCnExT2Z5OGprbWRHbXU3YSszV0VYSUtIZ0xIc0h6cFNXZGdQcGdKTnpPRk1EbDUrMnNaWHdIbGk0dTc1cVpicHUKdWJIbGQ4RUNnWUVBekpsZG9qb2lUNytiVlNyais5RHgvMkZkVWpRK2V4c3dZUnRUZFl1RDJBOTJON2hGaGlHVApTc1dkMUIrNFNrVlJuRWZSSllpTW1HYUJubWMwNU4yMXQ0dUlYdkY1em9iZVdNeU1DNnFRREVOYVlYNnJYUW9YCnE4SXVTK1pRVVdEREM1Y2h2T1M0NFBNNEcyTEZpbm54RkhsendLdjcwMUVod0xEYjlNTjJ6Y1VDZ1lFQTNSeVUKVmU5bHdOemdBcjlqcHdiTjd1b09icVpGVmptK09aRHJpUjNPaitYcVNSVjhFWnpwZVRuOS9wUzdyM2JFNmpEcApFdEtnMUdVUzNEc0VYdFhIUm1uQ3dET3JpRkNOZ0RxSWNTNjRNUXRQYkNVLzBSbk1WQmpKTXlqblJMU29FWHV3Ck9WSmcvMkJVaTk5SzJOUGtyM0Q1dnBBTXpvSXNCR3ViREtZMWl5Y0NnWUF2UGxhMXFCRFdNMXROM2pxSW9pWFAKSDQ5cDlQQmNndG00QXBSUjl5WTVsTkJxYTExNmJIUlRkckJNRkFyODgyYTEzSXQ1ekQ4U3pkQ3VZQXlCc0lSTwpYcVRkcjRxOTJyeXE2b2lJQlJtQUMybHFTOUtNQ0ZHUThxUzRGL1dCNVFNRXdTQWtPdmhKMFQrcWF6Tk1GMzVJCmlRYm1mWkFIcXB0Tm9Fa2FDcXg3TlFLQmdIaWplRGR1MTVpanFrRTFoVHlEVk9hT28zTXhtdEVSemowQVdkSkYKQmdlekRPSDFLKzA4TEpKczFxMEpIMkg3cmpLTW53NGJCNDc2MnBCNFRza2pZSWVGZXJGOVA1Q3ZTcFQwMnE3TwpLOGJ1Z2RYaWVQQXdZREJlR2FDbEo1RnY4K2NlRWlja1VESGxzQnRrcUNTbmI3VmRNWllNYUVCZiszNHA2NzI2CkRhcXZBb0dCQUx4RTl4akxYd0RIVlBjU0VTeHBqeGdVVmp5MkQvZHZLRTJDOE9BMFJBVEk3LzA5c3EvRk1hZHkKNm5sT0R3dlFtV1VuTXN1ZDFvZ3FIdmlOV1JIckNOZVZwemVhZWxQNFp3cGxCbkxXNFlxbG9pWDJBME9IVW9vTQpZNHd0WTJ2SFV4RWd5VEU5SVB6cW1MaVQ0WUxDZmozQ2pLb1k1akxBQk5sSVlCa3pqNXplCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+---
+# Source: chaos-mesh/templates/dns-configmap.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dns-server-config
+  namespace: "otel-demo"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: chaos-dns-server
+data:
+  Corefile: |
+    .:5353 {
+        errors
+        health {
+            lameduck 5s
+        }
+        ready
+        k8s_dns_chaos cluster.local in-addr.arpa ip6.arpa {
+            pods insecure
+            fallthrough in-addr.arpa ip6.arpa
+            ttl 30
+            grpcport 9288
+        }
+        prometheus :9153
+        forward . /etc/resolv.conf {
+            max_concurrent 1000
+        }
+        cache 30
+        loop
+        reload
+        loadbalance
+    }
+---
+# Source: chaos-mesh/templates/chaos-dashboard-rbac.yaml
+# ClusterRole for chaos-dashboard at cluster scope
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-dashboard-cluster-level
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: chaos-dashboard
+rules:
+  # chaos-dashboard could list namespace for selector hints
+  - apiGroups: [ "" ]
+    resources:
+      - namespaces
+    verbs:
+      - get
+      - list
+      - watch
+  # chaos-dashboard use subjectaccessreviews to authorize the requests
+  - apiGroups: [ "authorization.k8s.io" ]
+    resources:
+      - subjectaccessreviews
+    verbs:
+      - create
+---
+# Source: chaos-mesh/templates/chaos-dashboard-rbac.yaml
+# ClusterRole for chaos-dashboard in target namespace
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-dashboard-target-namespace
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: chaos-dashboard
+rules:
+  # chaos dashboard could list pods for selector hints
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - get
+      - list
+      - watch
+  # chaos dashboard could record evnets from chaos experiments
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - get
+      - list
+      - watch
+  # chaos dashboard could record and manipulate all the Chaos Mesh resources in target namespace
+  - apiGroups: [ "chaos-mesh.org" ]
+    resources:
+      - "*"
+    verbs: [ "*" ]
+---
+# Source: chaos-mesh/templates/controller-manager-rbac.yaml
+# roles
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-controller-manager-target-namespace
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: controller-manager
+rules:
+  - apiGroups: [ "" ]
+    resources: [ "pods", "configmaps", "secrets"]
+    verbs: [ "get", "list", "watch", "delete", "update", "patch" ]
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - "create"
+  - apiGroups:
+      - ""
+    resources:
+      - "pods/log"
+    verbs:
+      - "get"
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - patch
+      - create
+      - watch
+      - list
+      - get
+  - apiGroups: [ "chaos-mesh.org" ]
+    resources:
+      - "*"
+    verbs: [ "*" ]
+---
+# Source: chaos-mesh/templates/controller-manager-rbac.yaml
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-controller-manager-cluster-level
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: controller-manager
+rules:
+  - apiGroups: [ "" ]
+    resources:
+      - nodes
+      - persistentvolumes
+      - persistentvolumeclaims
+      - namespaces
+      - services
+    verbs: [ "get", "list", "watch" ]
+  - apiGroups: [ "authorization.k8s.io" ]
+    resources:
+      - subjectaccessreviews
+    verbs: [ "create" ]
+---
+# Source: chaos-mesh/templates/dns-rbac.yaml
+# roles
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-dns-server-target-namespace
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: dns-server
+rules:
+  - apiGroups: [ "" ]
+    resources: [ "pods" ]
+    verbs: [ "get", "list", "watch" ]
+  - apiGroups: [ "" ]
+    resources: [ "configmaps" ]
+    verbs: [ "*" ]
+  - apiGroups: [ "chaos-mesh.org" ]
+    resources:
+      - "*"
+    verbs: [ "*" ]
+---
+# Source: chaos-mesh/templates/dns-rbac.yaml
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-dns-server-cluster-level
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: dns-server
+rules:
+  - apiGroups: [ "" ]
+    resources:
+      - namespaces
+      - services
+      - endpoints
+      - pods
+    verbs: [ "get", "list", "watch" ]
+---
+# Source: chaos-mesh/templates/chaos-dashboard-rbac.yaml
+# ClusterRoleBinding for chaos-dashboard at cluster scope
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-dashboard-cluster-level
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: chaos-dashboard
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: chaos-mesh-chaos-dashboard-cluster-level
+subjects:
+  - kind: ServiceAccount
+    name: chaos-dashboard
+    namespace: "otel-demo"
+---
+# Source: chaos-mesh/templates/chaos-dashboard-rbac.yaml
+# binding ClusterRole to ServiceAccount for componnet chaos dashboard
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-dashboard-target-namespace
+  # TODO: notice that the targetNamespace is still defined as .Values.controllerManager.targetNamespace, .Values.targetNamespace would be better.
+  namespace: "chaos-mesh"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: chaos-dashboard
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: chaos-mesh-chaos-dashboard-target-namespace
+subjects:
+  - kind: ServiceAccount
+    name: chaos-dashboard
+    namespace: "otel-demo"
+---
+# Source: chaos-mesh/templates/controller-manager-rbac.yaml
+# bindings cluster level
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-controller-manager-cluster-level
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: controller-manager
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: chaos-mesh-chaos-controller-manager-cluster-level
+subjects:
+  - kind: ServiceAccount
+    name: chaos-controller-manager
+    namespace: "otel-demo"
+---
+# Source: chaos-mesh/templates/controller-manager-rbac.yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-controller-manager-target-namespace
+  namespace: "chaos-mesh"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: controller-manager
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: chaos-mesh-chaos-controller-manager-target-namespace
+subjects:
+  - kind: ServiceAccount
+    name: chaos-controller-manager
+    namespace: "otel-demo"
+---
+# Source: chaos-mesh/templates/dns-rbac.yaml
+# bindings cluster level
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-dns-server-cluster-level
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: dns-server
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: chaos-mesh-chaos-dns-server-cluster-level
+subjects:
+  - kind: ServiceAccount
+    name: chaos-dns-server
+    namespace: "otel-demo"
+---
+# Source: chaos-mesh/templates/dns-rbac.yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-dns-server-target-namespace
+  namespace: 
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: dns-server
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: chaos-mesh-chaos-dns-server-target-namespace
+subjects:
+  - kind: ServiceAccount
+    name: chaos-dns-server
+    namespace: "otel-demo"
+---
+# Source: chaos-mesh/templates/controller-manager-rbac.yaml
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-controller-manager-control-plane
+  namespace: "otel-demo"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: controller-manager
+rules:
+  - apiGroups: [ "" ]
+    resources: [ "services", "secrets" ]
+    verbs: [ "get", "list", "watch" ]
+  - apiGroups: ["discovery.k8s.io"]
+    resources: ["endpointslices"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [ "authorization.k8s.io" ]
+    resources:
+      - subjectaccessreviews
+    verbs: [ "create" ]
+  - apiGroups: [ "" ]
+    resources: [ "pods/exec" ]
+    verbs: [ "create" ]
+  - apiGroups: [ "coordination.k8s.io" ]
+    resources: [ "leases" ]
+    verbs: [ "*" ]
+  - apiGroups: [ "" ]
+    resources: [ "configmaps" ]
+    verbs: [ "*" ]
+---
+# Source: chaos-mesh/templates/dns-rbac.yaml
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-dns-server-control-plane
+  namespace: "otel-demo"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: dns-server
+rules:
+  - apiGroups: [ "" ]
+    resources: [ "configmaps" ]
+    verbs: [ "get", "list" ]
+---
+# Source: chaos-mesh/templates/controller-manager-rbac.yaml
+# binding for control plane namespace
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-controller-manager-control-plane
+  namespace: "otel-demo"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: controller-manager
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: chaos-mesh-chaos-controller-manager-control-plane
+subjects:
+  - kind: ServiceAccount
+    name: chaos-controller-manager
+    namespace: "otel-demo"
+---
+# Source: chaos-mesh/templates/dns-rbac.yaml
+# binding for control plane namespace
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chaos-mesh-chaos-dns-server-control-plane
+  namespace: "otel-demo"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: dns-server
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: chaos-mesh-chaos-dns-server-control-plane
+subjects:
+  - kind: ServiceAccount
+    name: chaos-dns-server
+    namespace: "otel-demo"
+---
+# Source: chaos-mesh/templates/chaos-daemon-service.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: "otel-demo"
+  name: chaos-daemon
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "31766"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: chaos-daemon
+spec:
+  clusterIP: None
+  ports:
+    - name: grpc
+      port: 31767
+      targetPort: grpc
+      protocol: TCP
+    - name: http
+      port: 31766
+      targetPort: http
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/component: chaos-daemon
+---
+# Source: chaos-mesh/templates/chaos-dashboard-deployment.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: "otel-demo"
+  name: chaos-dashboard
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: chaos-dashboard
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "2334"
+spec:
+  selector:
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/component: chaos-dashboard
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 2333
+      targetPort: 2333
+      name: http
+    - protocol: TCP
+      port: 2334
+      targetPort: 2334
+      name: metric
+---
+# Source: chaos-mesh/templates/controller-manager-service.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: "otel-demo"
+  name: chaos-mesh-controller-manager
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "10080"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: controller-manager
+spec:
+  type: ClusterIP
+  ports:
+    - port: 443
+      targetPort: webhook
+      protocol: TCP
+      name: webhook
+    - port: 10081
+      targetPort: pprof
+      protocol: TCP
+      name: pprof
+    - port: 10080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/component: controller-manager
+---
+# Source: chaos-mesh/templates/dns-service.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: chaos-mesh-dns-server
+  namespace: "otel-demo"
+  annotations:
+    prometheus.io/port: "9153"
+    prometheus.io/scrape: "true"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: dns-server
+spec:
+  selector:
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/component: chaos-dns-server
+  ports:
+  - name: dns
+    port: 53
+    targetPort: 5353
+    protocol: UDP
+  - name: dns-tcp
+    port: 53
+    targetPort: 5353
+    protocol: TCP
+  - name: metrics
+    port: 9153
+    protocol: TCP
+  - name: grpc
+    port: 9288
+    protocol: TCP
+---
+# Source: chaos-mesh/templates/chaos-daemon-daemonset.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  namespace: "otel-demo"
+  name: chaos-daemon
+  labels:
+    app.kubernetes.io/component: chaos-daemon
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: chaos-mesh
+      app.kubernetes.io/instance: chaos-mesh
+      app.kubernetes.io/component: chaos-daemon
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: chaos-mesh-2.8.1
+        app.kubernetes.io/name: chaos-mesh
+        app.kubernetes.io/instance: chaos-mesh
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/part-of: chaos-mesh
+        app.kubernetes.io/version: 2.8.1
+        app.kubernetes.io/component: chaos-daemon
+      annotations:
+        rollme: "jMF7V"
+    spec:
+      serviceAccountName: chaos-daemon
+      hostPID: true
+      containers:
+        - name: chaos-daemon
+          image: ghcr.io/chaos-mesh/chaos-daemon:v2.8.1
+          imagePullPolicy: IfNotPresent
+          command:
+            - /usr/local/bin/chaos-daemon
+            - --runtime
+            - docker
+            - --http-port
+            - !!str 31766
+            - --grpc-port
+            - !!str 31767
+            - --pprof
+            - --ca
+            - /etc/chaos-daemon/cert/ca.crt
+            - --cert
+            - /etc/chaos-daemon/cert/tls.crt
+            - --key
+            - /etc/chaos-daemon/cert/tls.key
+            - --runtime-socket-path
+            - /host-run/docker.sock
+          env:
+            - name: TZ
+              value: UTC
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - SYS_PTRACE
+          volumeMounts:
+            - name: socket-path
+              mountPath: /host-run
+            - name: sys-path
+              mountPath: /host-sys
+            - name: lib-modules
+              mountPath: /lib/modules
+            - name: chaos-daemon-cert
+              mountPath: /etc/chaos-daemon/cert
+              readOnly: true
+          ports:
+            - name: grpc
+              containerPort: 31767
+            - name: http
+              containerPort: 31766
+      volumes:
+        - name: socket-path
+          hostPath:
+            path: /var/run
+        - name: sys-path
+          hostPath:
+            path: /sys
+        - name: lib-modules
+          hostPath:
+            path: /lib/modules
+        - name: chaos-daemon-cert
+          secret:
+            secretName:  chaos-mesh-daemon-certs
+---
+# Source: chaos-mesh/templates/chaos-dashboard-deployment.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: "otel-demo"
+  name: chaos-dashboard
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: chaos-dashboard
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: chaos-mesh
+      app.kubernetes.io/instance: chaos-mesh
+      app.kubernetes.io/component: chaos-dashboard
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: chaos-mesh-2.8.1
+        app.kubernetes.io/name: chaos-mesh
+        app.kubernetes.io/instance: chaos-mesh
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/part-of: chaos-mesh
+        app.kubernetes.io/version: 2.8.1
+        app.kubernetes.io/component: chaos-dashboard
+      annotations:
+    spec:
+      securityContext:
+            {}
+      serviceAccountName: chaos-dashboard
+      containers:
+        - name: chaos-dashboard
+          image: ghcr.io/chaos-mesh/chaos-dashboard:v2.8.1
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits: {}
+            requests:
+              cpu: 25m
+              memory: 256Mi
+          command:
+            - /usr/local/bin/chaos-dashboard
+          env:
+            - name: CLEAN_SYNC_PERIOD
+              value: "12h"
+            - name: DATABASE_DATASOURCE
+              value: "/data/core.sqlite"
+            - name: DATABASE_DRIVER
+              value: "sqlite3"
+            - name: LISTEN_HOST
+              value: "0.0.0.0"
+            - name: LISTEN_PORT
+              value: "2333"
+            - name: METRIC_HOST
+              value: "0.0.0.0"
+            - name: METRIC_PORT
+              value: "2334"
+            - name: TTL_EVENT
+              value: "168h"
+            - name: TTL_EXPERIMENT
+              value: "336h"
+            - name: TTL_SCHEDULE
+              value: "336h"
+            - name: TTL_WORKFLOW
+              value: "336h"
+            - name: TZ
+              value: UTC
+            - name: CLUSTER_SCOPED
+              value: "true"
+            - name: TARGET_NAMESPACE
+              value: "chaos-mesh"
+            - name: ENABLE_FILTER_NAMESPACE
+              value: "false"
+            - name: SECURITY_MODE
+              value: "false"
+            - name: GCP_SECURITY_MODE
+              value: "false"
+            - name: GCP_CLIENT_ID
+              value: ""
+            - name: GCP_CLIENT_SECRET
+              value: ""
+            - name: DNS_SERVER_CREATE
+              value: "true"
+            - name: ROOT_URL
+              value: "http://localhost:2333"
+            - name: ENABLE_PROFILING
+              value: "true"
+          volumeMounts:
+            - name: storage-volume
+              mountPath: /data
+              subPath: ""
+          ports:
+            - name: http
+              containerPort: 2333
+            - name: metric
+              containerPort: 2334
+      volumes:
+      - name: storage-volume
+        emptyDir: {}
+---
+# Source: chaos-mesh/templates/controller-manager-deployment.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: "otel-demo"
+  name: chaos-controller-manager
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: controller-manager
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: chaos-mesh
+      app.kubernetes.io/instance: chaos-mesh
+      app.kubernetes.io/component: controller-manager
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: chaos-mesh-2.8.1
+        app.kubernetes.io/name: chaos-mesh
+        app.kubernetes.io/instance: chaos-mesh
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/part-of: chaos-mesh
+        app.kubernetes.io/version: 2.8.1
+        app.kubernetes.io/component: controller-manager
+      annotations:
+        rollme: "SGlwm"
+    spec:
+      securityContext:
+            {}
+      serviceAccountName: chaos-controller-manager
+      containers:
+      - name: chaos-mesh
+        image: ghcr.io/chaos-mesh/chaos-mesh:v2.8.1
+        imagePullPolicy: IfNotPresent
+        resources:
+            limits: {}
+            requests:
+              cpu: 25m
+              memory: 256Mi
+        command:
+          - /usr/local/bin/chaos-controller-manager
+        env:
+          - name: METRICS_PORT
+            value: "10080"
+          - name: WEBHOOK_PORT
+            value: "10250"
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: TEMPLATE_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: ALLOW_HOST_NETWORK_TESTING
+            value: "false"
+          - name: TARGET_NAMESPACE
+            value: "chaos-mesh"
+          - name: QPS
+            value: "30"
+          - name: BURST
+            value:  "50"
+          - name: CLUSTER_SCOPED
+            value: "true"
+          - name: TZ
+            value: UTC
+          - name: CHAOS_DAEMON_SERVICE_PORT
+            value: !!str 31767
+          - name: BPFKI_PORT
+            value: !!str 50051
+          - name: ENABLED_CONTROLLERS
+            value: "*"
+          - name: ENABLED_WEBHOOKS
+            value: "*"
+          - name: TEMPLATE_LABELS
+            value: "app.kubernetes.io/component:template"
+          - name: CONFIGMAP_LABELS
+            value: "app.kubernetes.io/component:webhook"
+          - name: ENABLE_FILTER_NAMESPACE
+            value: "false"
+          - name: PPROF_ADDR
+            value: ":10081"
+          - name: CHAOS_DNS_SERVICE_NAME
+            value: chaos-mesh-dns-server
+          - name: CHAOS_DNS_SERVICE_PORT
+            value: !!str 9288
+          - name: SECURITY_MODE
+            value: "false"
+          - name: CHAOSD_SECURITY_MODE
+            value: "true"
+          - name: CHAOS_DAEMON_CLIENT_CERT
+            value: /etc/chaos-daemon/cert/tls.crt
+          - name: CHAOS_DAEMON_CLIENT_KEY
+            value: /etc/chaos-daemon/cert/tls.key
+          - name: CHAOS_MESH_CA_CERT
+            value: /etc/chaos-daemon/cert/ca.crt
+          - name: CHAOSD_CA_CERT
+            value: /etc/chaosd/cert/ca.crt
+          - name: CHAOSD_CLIENT_CERT
+            value: /etc/chaosd/cert/tls.crt
+          - name: CHAOSD_CLIENT_KEY
+            value: /etc/chaosd/cert/tls.key
+          - name: POD_FAILURE_PAUSE_IMAGE
+            value: gcr.io/google-containers/pause:latest
+          - name: ENABLE_LEADER_ELECTION
+            value: "true"
+          - name: LEADER_ELECT_LEASE_DURATION
+            value: "15s"
+          - name: LEADER_ELECT_RENEW_DEADLINE
+            value: "10s"
+          - name: LEADER_ELECT_RETRY_PERIOD
+            value: "2s"
+        volumeMounts:
+          - name: webhook-certs
+            mountPath: /etc/webhook/certs
+            readOnly: true
+          - name: chaos-daemon-client-cert
+            mountPath: /etc/chaos-daemon/cert
+            readOnly: true
+          - name: chaosd-client-cert
+            mountPath: /etc/chaosd/cert
+            readOnly: true
+        ports:
+          - name: webhook
+            containerPort: 10250
+          - name: http
+            containerPort: 10080
+          - name: pprof
+            containerPort: 10081
+      volumes:
+        - name: webhook-certs
+          secret:
+            secretName: chaos-mesh-webhook-certs
+        - name: chaos-daemon-client-cert
+          secret:
+            secretName: chaos-mesh-daemon-client-certs
+        - name: chaosd-client-cert
+          secret:
+            secretName: chaos-mesh-chaosd-client-certs
+---
+# Source: chaos-mesh/templates/dns-deployment.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chaos-dns-server
+  namespace: "otel-demo"
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: chaos-dns-server
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: chaos-mesh
+      app.kubernetes.io/instance: chaos-mesh
+      app.kubernetes.io/component: chaos-dns-server
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: chaos-mesh-2.8.1
+        app.kubernetes.io/name: chaos-mesh
+        app.kubernetes.io/instance: chaos-mesh
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/part-of: chaos-mesh
+        app.kubernetes.io/version: 2.8.1
+        app.kubernetes.io/component: chaos-dns-server
+    spec:
+      serviceAccountName: chaos-dns-server
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app.kubernetes.io/component
+                  operator: In
+                  values:
+                  - chaos-dns-server
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+      priorityClassName: 
+      containers:
+      - name: chaos-dns-server
+        image: ghcr.io/chaos-mesh/chaos-coredns:v0.2.8
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits: {}
+          requests:
+            cpu: 100m
+            memory: 70Mi
+        args: [ "-conf", "/etc/chaos-dns/Corefile" ]
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/chaos-dns
+          readOnly: true
+        ports:
+        - containerPort: 5353
+          name: dns
+          protocol: UDP
+        - containerPort: 5353
+          name: dns-tcp
+          protocol: TCP
+        - containerPort: 9153
+          name: metrics
+          protocol: TCP
+        - containerPort: 9288
+          name: grpc
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8181
+            scheme: HTTP
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            add:
+            - NET_BIND_SERVICE
+            drop:
+            - all
+          readOnlyRootFilesystem: true
+      dnsPolicy: Default
+      volumes:
+        - name: config-volume
+          configMap:
+            name: dns-server-config
+            items:
+            - key: Corefile
+              path: Corefile
+---
+# Source: chaos-mesh/templates/mutating-admission-webhooks.yaml
+# Copyright 2022 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: chaos-mesh-mutation
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: admission-webhook
+webhooks:
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-podchaos
+    failurePolicy: Fail
+    name: mpodchaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - podchaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-iochaos
+    failurePolicy: Fail
+    name: miochaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - iochaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-timechaos
+    failurePolicy: Fail
+    name: mtimechaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - timechaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-networkchaos
+    failurePolicy: Fail
+    name: mnetworkchaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - networkchaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-kernelchaos
+    failurePolicy: Fail
+    name: mkernelchaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - kernelchaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-stresschaos
+    failurePolicy: Fail
+    name: mstresschaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - stresschaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-awschaos
+    failurePolicy: Fail
+    name: mawschaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - awschaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-azurechaos
+    failurePolicy: Fail
+    name: mazurechaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - azurechaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-gcpchaos
+    failurePolicy: Fail
+    name: mgcpchaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - gcpchaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-dnschaos
+    failurePolicy: Fail
+    name: mdnschaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - dnschaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-jvmchaos
+    failurePolicy: Fail
+    name: mjvmchaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - jvmchaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-schedule
+    failurePolicy: Fail
+    name: mschedule.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - schedules
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-workflow
+    failurePolicy: Fail
+    name: mworkflow.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - workflows
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-httpchaos
+    failurePolicy: Fail
+    name: mhttpchaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - httpchaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-blockchaos
+    failurePolicy: Fail
+    name: mblockchaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - blockchaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-physicalmachinechaos
+    failurePolicy: Fail
+    name: mphysicalmachinechaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - physicalmachinechaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-physicalmachine
+    failurePolicy: Fail
+    name: mphysicalmachine.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - physicalmachines
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-statuscheck
+    failurePolicy: Fail
+    name: mstatuscheck.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - statuschecks
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /mutate-chaos-mesh-org-v1alpha1-remotecluster
+    failurePolicy: Fail
+    name: mremotecluster.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - remotecluster
+---
+# Source: chaos-mesh/templates/validating-admission-webhooks.yaml
+# Copyright 2022 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: chaos-mesh-validation
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: admission-webhook
+webhooks:
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-podchaos
+    failurePolicy: Fail
+    name: vpodchaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - podchaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-iochaos
+    failurePolicy: Fail
+    name: viochaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - iochaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-timechaos
+    failurePolicy: Fail
+    name: vtimechaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - timechaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-networkchaos
+    failurePolicy: Fail
+    name: vnetworkchaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - networkchaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-kernelchaos
+    failurePolicy: Fail
+    name: vkernelchaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - kernelchaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-stresschaos
+    failurePolicy: Fail
+    name: vstresschaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - stresschaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-awschaos
+    failurePolicy: Fail
+    name: vawschaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - awschaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-azurechaos
+    failurePolicy: Fail
+    name: vazurechaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - azurechaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-gcpchaos
+    failurePolicy: Fail
+    name: vgcpchaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - gcpchaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-dnschaos
+    failurePolicy: Fail
+    name: vdnschaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - dnschaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-jvmchaos
+    failurePolicy: Fail
+    name: vjvmchaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - jvmchaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-schedule
+    failurePolicy: Fail
+    name: vschedule.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - schedules
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-workflow
+    failurePolicy: Fail
+    name: vworkflow.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - workflows
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-httpchaos
+    failurePolicy: Fail
+    name: vhttpchaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - httpchaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-blockchaos
+    failurePolicy: Fail
+    name: vblockchaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - blockchaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-physicalmachinechaos
+    failurePolicy: Fail
+    name: vphysicalmachinechaos.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - physicalmachinechaos
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-physicalmachine
+    failurePolicy: Fail
+    name: vphysicalmachine.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - physicalmachines
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-statuscheck
+    failurePolicy: Fail
+    name: vstatuscheck.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - statuschecks
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-chaos-mesh-org-v1alpha1-remotecluster
+    failurePolicy: Fail
+    name: vremotecluster.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - remotecluster
+---
+# Source: chaos-mesh/templates/validating-admission-webhooks.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: chaos-mesh-validation-auth
+  labels:
+    helm.sh/chart: chaos-mesh-2.8.1
+    app.kubernetes.io/name: chaos-mesh
+    app.kubernetes.io/instance: chaos-mesh
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: chaos-mesh
+    app.kubernetes.io/version: 2.8.1
+    app.kubernetes.io/component: admission-webhook
+webhooks:
+  - clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lSQU9HV3cvdzNBeUVrNVh4Y2UwaWpSKzh3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQXhNTlkyaGhiM010YldWemFDMWpZVEFlRncweU5qQXpNakl4TURBM01UTmFGdzB6TVRBegpNakV4TURBM01UTmFNRFl4TkRBeUJnTlZCQU1USzJOb1lXOXpMVzFsYzJndFkyOXVkSEp2Ykd4bGNpMXRZVzVoCloyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEYnVTS3VnWGpXQzVyek8wUXA3b0ZVUWRYdTUzcWNVcUpBRDY5K3F3M1hQUW0vc3pqYmVZN3dZMW1CVWI3egpjVnJLWnprVHExcFRtUkl4Q28raVk0bzFVVW9JZUZOUFdjMkVuV0RUSG9helZkNU41Q2FrS1FReWU5TTJuVnByCjJaQXFXdUxheVl4Z2YvOHRSUmIxelpIMmxTd3EwaURBTXp1Q1dzVnFkMlpPM3h3ajdvWjUxWUl6dHJuYm8ralQKMkdabkpGTUxOcUVqa2liQWZTN29ZN01qbE9lWXQ0dzExWURwMjRmUHZ2UG1QbDA0WHZSaU9nVnNyQkg5d3RvSgpKSWU1Q2k2ZXRad2g1TkdMNlVob0RrSFdua2ZmNFlaUUIydW1VU0I1cUhNc1h2RXNGWFpWQWh1Q1A0Skl6V0hSCnNzdE5lay9PUStxbTlKUWZqUjhBWk1iWkFnTUJBQUdqZ1prd2daWXdEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CMEcKQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWNEQWpBTUJnTlZIUk1CQWY4RUFqQUFNQjhHQTFVZApJd1FZTUJhQUZKSFM0LzRwRzdjS2l3SFQ5OGd1N0c4WTVZUWhNRFlHQTFVZEVRUXZNQzJDSzJOb1lXOXpMVzFsCmMyZ3RZMjl1ZEhKdmJHeGxjaTF0WVc1aFoyVnlMbTkwWld3dFpHVnRieTV6ZG1Nd0RRWUpLb1pJaHZjTkFRRUwKQlFBRGdnRUJBRCtrRGNhVytKYjZndm11QmFEYUF5NFRSdXBBOTFNTkxoK2h5NVNiTElRdk5uRTV5SlFpaG9LMApSZXJBZ20xd2lGQXdMdTJlNGpHajUvaTNKY0EybkR0YW9vaHBlTElnc3dWZHRpWE4ybi9zTG5oYWpRTXprQkRzCk1MNEU3NHlJV21HZG8xOFIxNWlaTjdLTjJvdlZtcTBlSnhJbTJWZWZRTmJqUG5CaEdBay9kU1Q2b050RTJ5MUkKUFp3K3V1VzZiNnRnTTZtelJjTjRiRElvdXpkbXIySUt6bW0wcFNlRkJrYXkyWFRCMTNwV1dIaEd4ZHlCS2lhTgpIRi9KNXV0dUZSNFNrVUphK0NMdXRUL3pYUDJwVmlaL3FpeW1TQVNySENqWmpzUkVOd2piOW40bmpPNXhTTkMvCmNGZjRZUE16Um01RWd1QzM1UXRJbmUzeVZhVDAzT3c9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: "otel-demo"
+        path: /validate-auth
+    failurePolicy: Fail
+    name: vauth.kb.io
+    timeoutSeconds: 5
+    sideEffects: None
+    admissionReviewVersions: ["v1", "v1beta1"]
+    rules:
+      - apiGroups:
+          - chaos-mesh.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources: [ "*" ]
+---
+# Source: chaos-mesh/templates/cert-manager-certs.yaml
+# Copyright 2022 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+---
+# Source: chaos-mesh/templates/chaos-daemon-rbac.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+---
+# Source: chaos-mesh/templates/chaos-dashboard-pvc.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+---
+# Source: chaos-mesh/templates/extra-manifests.yaml
+# Copyright 2025 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+---
+# Source: chaos-mesh/templates/ingress.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+---
+# Source: chaos-mesh/templates/prometheus-configmap.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+---
+# Source: chaos-mesh/templates/prometheus-deployment.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+---
+# Source: chaos-mesh/templates/prometheus-rbac.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+---
+# Source: chaos-mesh/templates/prometheus-service.yaml
+# Copyright 2021 Chaos Mesh Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
