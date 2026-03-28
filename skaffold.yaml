@@ -10,20 +10,20 @@ build:
     push: true
 
   artifacts:
-    - image: accounting
-      context: .
-      docker:
-        dockerfile: src/accounting/Dockerfile
+    # - image: accounting
+    #   context: .
+    #   docker:
+    #     dockerfile: src/accounting/Dockerfile
 
-    - image: cart
-      context: .
-      docker:
-        dockerfile: src/cart/src/Dockerfile
+    # - image: cart
+    #   context: .
+    #   docker:
+    #     dockerfile: src/cart/src/Dockerfile
 
-    - image: checkout
-      context: .
-      docker:
-        dockerfile: src/checkout/Dockerfile
+    # - image: checkout
+    #   context: .
+    #   docker:
+    #     dockerfile: src/checkout/Dockerfile
 
     # - image: currency
     #   context: .
