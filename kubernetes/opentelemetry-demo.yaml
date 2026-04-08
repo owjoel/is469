@@ -470,6 +470,7 @@ data:
             labels:
               severity: warning
               scope: symptom
+              service_name: frontend
             annotations:
               summary: "Checkout failures detected"
               description: "Error rate on /api/checkout exceeded 10% for 30s."
@@ -479,6 +480,7 @@ data:
               sum(rate(app_frontend_requests_total{target="/api/checkout", status="500"}[2m])) > 0
             for: 30s
             labels:
+              service_name: frontend
               severity: warning
               scope: symptom
             annotations:
@@ -494,6 +496,7 @@ data:
               ) > 0.05
             for: 1m
             labels:
+              service_name: frontend
               severity: warning
               scope: symptom
             annotations:
@@ -505,6 +508,7 @@ data:
               sum(rate(app_frontend_requests_total{target="/api/checkout"}[5m])) < 0.01
             for: 3m
             labels:
+              service_name: frontend
               severity: warning
               scope: symptom
             annotations:
@@ -516,6 +520,7 @@ data:
               sum(rate(app_frontend_requests_total[5m])) < 0.2
             for: 3m
             labels:
+              service_name: frontend
               severity: warning
               scope: symptom
             annotations:
@@ -532,6 +537,7 @@ data:
               ) > 1000
             for: 2m
             labels:
+              service_name: frontend
               severity: warning
               scope: symptom
             annotations:
@@ -543,6 +549,7 @@ data:
               increase(kube_pod_container_status_restarts_total{k8s_namespace_name="otel-demo"}[10m]) > 0
             for: 1m
             labels:
+              service_name: unknown
               severity: warning
               scope: infrastructure
             annotations:
@@ -562,6 +569,7 @@ data:
               ) > 1500
             for: 2m
             labels:
+              service_name: frontend
               severity: warning
               scope: symptom
               class: latency
@@ -592,6 +600,7 @@ data:
               )
             for: 2m
             labels:
+              service_name: frontend
               severity: warning
               scope: symptom
               class: async-degradation
@@ -611,6 +620,7 @@ data:
               ) > 2000
             for: 2m
             labels:
+              service_name: frontend
               severity: warning
               scope: symptom
               class: latency
@@ -647,12 +657,49 @@ data:
               )
             for: 90s
             labels:
+              service_name: frontend
               severity: warning
               scope: symptom
               class: checkout-degradation
             annotations:
               summary: "Checkout degradation under load"
               description: "Active checkout traffic with either elevated failures or latency."
+
+          - alert: FraudDetectionOrdersProcessLatencyHigh
+            expr: |
+              (
+                histogram_quantile(
+                  0.95,
+                  sum by (le) (
+                    rate(traces_span_metrics_duration_milliseconds_bucket{
+                      service_name="fraud-detection",
+                      span_kind="SPAN_KIND_CONSUMER",
+                      span_name="orders process",
+                      status_code="STATUS_CODE_UNSET"
+                    }[5m])
+                  )
+                ) > 1000
+              )
+              and
+              (
+                sum(
+                  rate(traces_span_metrics_duration_milliseconds_count{
+                    service_name="fraud-detection",
+                    span_kind="SPAN_KIND_CONSUMER",
+                    span_name="orders process",
+                    status_code="STATUS_CODE_UNSET"
+                  }[5m])
+                ) > 0.05
+              )
+            for: 2m
+            labels:
+              service_name: fraud-detection
+              severity: warning
+              scope: symptom
+              class: kafka-consumer-latency
+            annotations:
+              summary: "Fraud detection consumer processing is slow"
+              description: "Fraud-detection orders processing p95 exceeded 1200 ms while traffic was present."
   alerts: |
     {}
   prometheus.yml: |
