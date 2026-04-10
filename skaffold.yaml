@@ -4,6 +4,9 @@ kind: Config
 manifests:
   rawYaml:
     - kubernetes/opentelemetry-demo.yaml
+    - kubernetes/loki.yaml
+    - kubernetes/tempo.yaml
+    - kubernetes/chaos-mesh.yaml
 
 build:
   local:

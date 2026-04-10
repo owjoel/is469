@@ -546,15 +546,17 @@ data:
 
           - alert: ServiceRestartDetected
             expr: |
-              increase(kube_pod_container_status_restarts_total{k8s_namespace_name="otel-demo"}[10m]) > 0
+              sum by (namespace, pod, container) (
+                increase(kube_pod_container_status_restarts_total{namespace="otel-demo"}[10m])
+              ) >= 3
             for: 1m
             labels:
               service_name: unknown
               severity: warning
               scope: infrastructure
             annotations:
-              summary: "A service container restarted"
-              description: "At least one otel-demo container restarted in the last 10 minutes."
+              summary: "Container restart rate is high"
+              description: "Container {{ $labels.container }} in pod {{ $labels.namespace }}/{{ $labels.pod }} restarted at least 3 times in the last 10 minutes."
           
           - alert: CheckoutLatencyHigh
             expr: |
@@ -660,7 +662,7 @@ data:
               service_name: frontend
               severity: warning
               scope: symptom
-              class: checkout-degradation
+              class: latency
             annotations:
               summary: "Checkout degradation under load"
               description: "Active checkout traffic with either elevated failures or latency."
@@ -696,10 +698,76 @@ data:
               service_name: fraud-detection
               severity: warning
               scope: symptom
-              class: kafka-consumer-latency
+              class: latency
             annotations:
               summary: "Fraud detection consumer processing is slow"
               description: "Fraud-detection orders processing p95 exceeded 1200 ms while traffic was present."
+
+          - alert: AdServiceCpuHighWithLatencyRegression
+            expr: |
+              (
+                sum(
+                  rate(container_cpu_usage_seconds_total{
+                    namespace="otel-demo",
+                    pod=~"ad-.*",
+                    container="ad"
+                  }[5m])
+                ) > 0.3
+              )
+              and
+              (
+                histogram_quantile(
+                  0.95,
+                  sum by (le) (
+                    rate(rpc_server_duration_milliseconds_bucket{
+                      service_name="ad",
+                      rpc_service="oteldemo.AdService",
+                      rpc_method="GetAds"
+                    }[5m])
+                  )
+                ) > 50
+              )
+            for: 2m
+            labels:
+              service_name: ad
+              severity: warning
+              scope: symptom
+              class: cpu
+            annotations:
+              summary: "Ad service is CPU-stressed and slower than normal"
+              description: "Ad pod CPU is high and AdService/GetAds p95 latency exceeded 50 ms for 2 minutes."
+
+          - alert: CartEmptyCartErrorsPresent
+            expr: |
+              (
+                sum(
+                  rate(traces_span_metrics_calls_total{
+                    service_name="cart",
+                    span_kind="SPAN_KIND_SERVER",
+                    span_name="POST /oteldemo.CartService/EmptyCart",
+                    status_code="STATUS_CODE_ERROR"
+                  }[5m])
+                ) > 0
+              )
+              and
+              (
+                sum(
+                  rate(traces_span_metrics_calls_total{
+                    service_name="cart",
+                    span_kind="SPAN_KIND_SERVER",
+                    span_name="POST /oteldemo.CartService/EmptyCart"
+                  }[5m])
+                ) > 0.01
+              )
+            for: 2m
+            labels:
+              service_name: cart
+              severity: warning
+              scope: symptom
+              class: error_rate
+            annotations:
+              summary: "Cart empty operation is failing"
+              description: "CartService EmptyCart requests are failing while traffic is present."
   alerts: |
     {}
   prometheus.yml: |
@@ -18912,6 +18980,7 @@ spec:
               memory: 300Mi
               cpu: 100m
             limits:
+              cpu: 500m
               memory: 300Mi
           volumeMounts:
       volumes:
